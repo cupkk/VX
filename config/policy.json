@@ -1,0 +1,38 @@
+{
+  "blacklist_terms": [
+    "稳赚",
+    "保赚",
+    "躺赚",
+    "暴富",
+    "内幕",
+    "割韭菜",
+    "100%有效",
+    "绝对正确",
+    "秒杀所有",
+    "吊打",
+    "神药",
+    "包治",
+    "稳赚不赔"
+  ],
+  "sensitive_boundaries": [
+    "医疗诊断和治疗建议",
+    "金融投资收益承诺",
+    "法律结论或规避监管建议",
+    "政治敏感动员",
+    "仇恨、歧视、暴力和色情内容",
+    "未经证实的个人隐私和商业机密"
+  ],
+  "citation_preferences": [
+    "优先引用官方文档、论文、技术博客原文和开源项目 README",
+    "无法核实时用经验性表述，不把推测写成事实",
+    "算法知识优先给直觉解释，再给必要术语"
+  ],
+  "wechat_layout": {
+    "max_title_chars": 32,
+    "summary_chars": 90,
+    "paragraph_chars": 120,
+    "use_short_sections": true,
+    "avoid_dense_formula": true
+  }
+}
+

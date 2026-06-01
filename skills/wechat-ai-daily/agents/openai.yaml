@@ -1,0 +1,4 @@
+interface:
+  display_name: "WeChat AI Daily"
+  short_description: "Daily AI公众号 draft workflow"
+  default_prompt: "Create today's AI公众号 draft, score it, and prepare a cover prompt."

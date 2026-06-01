@@ -1,0 +1,20 @@
+{
+  "total": 100,
+  "passed": true,
+  "threshold": 85,
+  "details": {
+    "title": 10,
+    "structure": 14,
+    "readability": 14,
+    "warmth": 12,
+    "technical_grounding": 16,
+    "actionability": 10,
+    "safety": 12,
+    "image_fit": 6,
+    "source_discipline": 6
+  },
+  "reasons": [
+    "达到入库标准，可保存为本地待审稿。"
+  ],
+  "rewrite_required": false
+}

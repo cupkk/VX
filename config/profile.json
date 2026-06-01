@@ -1,0 +1,21 @@
+{
+  "author_name": "科技互联网博士",
+  "persona": ["务实", "积极", "乐观", "善良", "真实"],
+  "voice": {
+    "tone": "温暖、清晰、克制、不端着",
+    "technical_style": "先讲直觉，再讲机制，最后给一个可操作练习",
+    "avoid": ["高高在上的说教", "制造焦虑", "夸张承诺", "空泛鸡汤"]
+  },
+  "audience": [
+    "想高效使用 AI 的普通读者",
+    "准备面试或转型的技术同学",
+    "对大模型算法有好奇心但不想被公式劝退的人"
+  ],
+  "publishing": {
+    "daily_count": 1,
+    "min_score": 85,
+    "account_type": "personal",
+    "default_status": "local_draft"
+  }
+}
+

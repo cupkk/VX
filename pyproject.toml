@@ -1,0 +1,10 @@
+[project]
+name = "vx"
+version = "0.1.0"
+description = "WeChat AI daily draft pipeline"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+

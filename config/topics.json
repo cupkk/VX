@@ -1,0 +1,33 @@
+{
+  "rotation": [
+    {
+      "category": "practical_tip",
+      "category_label": "AI 实用技巧",
+      "title_seed": "把复杂任务交给 AI 前，先写清楚验收标准",
+      "core_question": "为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？",
+      "technical_terms": ["任务拆解", "验收标准", "上下文", "提示词"]
+    },
+    {
+      "category": "tech_explainer",
+      "category_label": "AI 技术解析",
+      "title_seed": "大模型为什么会一本正经地胡说？",
+      "core_question": "幻觉不是模型坏掉，而是生成机制和训练目标共同带来的副作用。",
+      "technical_terms": ["语言模型", "概率分布", "幻觉", "检索增强"]
+    },
+    {
+      "category": "daily_algorithm",
+      "category_label": "每日一道算法",
+      "title_seed": "Transformer 为什么需要位置编码？",
+      "core_question": "如果只看词本身，不看顺序，模型怎么知道“我喜欢你”和“你喜欢我”不一样？",
+      "technical_terms": ["Transformer", "位置编码", "注意力机制", "序列建模"]
+    },
+    {
+      "category": "interview",
+      "category_label": "算法八股文",
+      "title_seed": "面试里怎么讲清楚注意力机制？",
+      "core_question": "把注意力机制讲成一句人话：在一堆信息里，动态决定此刻该多看谁。",
+      "technical_terms": ["Query", "Key", "Value", "Attention", "Softmax"]
+    }
+  ]
+}
+
