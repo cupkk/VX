@@ -161,7 +161,8 @@
     "private_response_dir": "wechat_private"
   },
   "github_sync": {
-    "status": "pending",
-    "command": "powershell -ExecutionPolicy Bypass -File scripts\\sync_github.ps1"
+    "status": "pushed",
+    "remote_branch": "origin/main",
+    "verified_at": "2026-06-01T15:56:25+08:00"
   }
 }
