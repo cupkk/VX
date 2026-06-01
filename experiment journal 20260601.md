@@ -173,3 +173,32 @@
 - 当前下一步：
   - 跑测试、skill 校验、秘密扫描和 Git 状态核验。
   - 提交并推送本轮真实闭环结果。
+
+## 文章质量与排版升级（2026-06-01 14:35 +08:00）
+
+- 用户确认按方案 A 实施：规则门禁 + 编辑协议 + 公众号移动端预览主题。
+- 已把评分器从关键词计数升级为发布质量门禁，新增硬阻断项：资源主题错配、本地路径或 NotebookLM 链接泄露、模板化 AI 写作痕迹、缺少来源注记、缺少具体例子、缺少边界或取舍、缺少可执行动作、黑名单词命中。
+- 已拆分产物边界：
+  - `article.md` 只保留干净发布稿。
+  - `article.html` 保留微信上传用 HTML。
+  - `review.json` 保存评分、硬阻断项、警告和原因。
+  - `metadata.json` 保存运行状态和资源来源。
+  - `cover_prompt.txt` 保存封面提示词。
+- 已升级 HTML 渲染为 `data-vx-theme="wechat-ai-daily"` 主题，正文采用移动端友好的 16px、1.85 行高、短段落、克制引用块、来源/边界提示块。
+- 已升级 NotebookLM/KV Cache 资源生成逻辑：当本地知识库包含 KV Cache、PagedAttention、长上下文等线索时，选题会直接切到《为什么大模型越聊越卡？》，而不是继续套用通用轮换题。
+- 已更新 repo-local skill 和 references：
+  - `skills/wechat-ai-daily/SKILL.md`
+  - `skills/wechat-ai-daily/references/editorial-quality-gate.md`
+  - `skills/wechat-ai-daily/references/wechat-layout.md`
+  - `skills/wechat-ai-daily/references/humanizer-checklist.md`
+  - `skills/wechat-ai-daily/references/content-standards.md`
+- 已新增和更新测试，覆盖质量阻断、稿件/审计拆分、HTML 主题、NotebookLM 资源主导选题。
+- 已生成新的本地预览稿：`drafts/2026-06-03/001-2026-06-03-tech_explainer-8400406a/`，标题为《为什么大模型越聊越卡？》。
+- 新预览稿 `review.json`：总分 100，通过，`hard_blockers=[]`，`warnings=[]`。
+- 已执行微信上传 dry-run，生成 `wechat_draft_payload.dry_run.json`；本次未执行真实上传，避免在质量升级阶段直接写入公众号草稿箱。
+- 已用临时本地 HTTP 服务和 Playwright 打开 `article.html` 检查预览；页面加载成功，仅有浏览器自动请求 `favicon.ico` 导致的 404，不影响文章。
+- 已通过验证：
+  - `python -m unittest discover -s tests`
+  - `python -X utf8 C:\Users\18103\.codex\skills\.system\skill-creator\scripts\quick_validate.py D:\github\VX\skills\wechat-ai-daily`
+  - `git diff --check`，仅有 Windows 换行提示，无空白错误。
+- 下一步建议：人工读一遍新预览稿，再决定是否生成封面图并执行真实微信草稿箱上传。

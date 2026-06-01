@@ -4,22 +4,17 @@ import html
 import json
 from pathlib import Path
 
-from .models import ArticleDraft, ScoreResult
+from .models import ArticleDraft
 
 
-def render_markdown(draft: ArticleDraft, score: ScoreResult, status: str) -> str:
+def render_markdown(draft: ArticleDraft, status: str) -> str:
     tags = ", ".join(draft.tags)
     lines = [
         "---",
         f"title: {draft.title}",
         f"date: {draft.date}",
         f"status: {status}",
-        f"score: {score.total}",
-        f"threshold: {score.threshold}",
-        f"attempt: {draft.attempt}",
         f"tags: {tags}",
-        "wechat_media_id: ",
-        "cover_media_id: ",
         "---",
         "",
         f"# {draft.title}",
@@ -39,42 +34,45 @@ def render_markdown(draft: ArticleDraft, score: ScoreResult, status: str) -> str
         if section.bullets:
             lines.append("")
 
-    lines.extend(
-        [
-            "## 自动评分摘要",
-            "",
-            f"- 总分：{score.total}/{100}",
-            f"- 门槛：{score.threshold}",
-            f"- 是否通过：{'是' if score.passed else '否'}",
-            f"- 是否需要重写：{'是' if score.rewrite_required else '否'}",
-            "",
-        ]
-    )
-    for reason in score.reasons:
-        lines.append(f"- {reason}")
-    lines.extend(["", "## 封面图提示词", "", "```text", draft.cover_prompt.rstrip(), "```", ""])
-    return "\n".join(lines)
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def _section_style(section_heading: str) -> str:
+    if "来源" in section_heading or "边界" in section_heading:
+        return (
+            "margin:28px 0 0;padding:14px 16px;"
+            "background:#f7f8f5;border-left:4px solid #6f8f72;border-radius:4px;"
+        )
+    return "margin:30px 0 0;padding:0;"
 
 
 def render_html(draft: ArticleDraft) -> str:
     blocks = [
-        '<section style="font-size:16px;line-height:1.85;color:#222;">',
-        f'<h1 style="font-size:22px;line-height:1.4;">{html.escape(draft.title)}</h1>',
-        f'<blockquote style="margin:16px 0;padding:12px 16px;background:#f7f7f7;border-left:4px solid #7aa874;">{html.escape(draft.summary)}</blockquote>',
+        '<section data-vx-theme="wechat-ai-daily" style="font-size:16px;line-height:1.85;'
+        'color:#242424;letter-spacing:0;word-break:break-word;">',
+        f'<h1 style="font-size:22px;line-height:1.4;margin:0 0 14px;font-weight:700;color:#111;">{html.escape(draft.title)}</h1>',
+        '<blockquote style="margin:16px 0 22px;padding:12px 16px;background:#f6f7f8;'
+        'border-left:4px solid #4f7f73;color:#3d3d3d;border-radius:4px;">'
+        f"{html.escape(draft.summary)}</blockquote>",
     ]
     for section in draft.sections:
-        blocks.append(f'<h2 style="font-size:19px;margin-top:28px;">{html.escape(section.heading)}</h2>')
+        blocks.append(f'<section style="{_section_style(section.heading)}">')
+        blocks.append(
+            '<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;'
+            'font-weight:700;color:#1f3d36;">'
+            f"{html.escape(section.heading)}</h2>"
+        )
         for paragraph in section.paragraphs:
-            blocks.append(f"<p>{html.escape(paragraph)}</p>")
+            blocks.append(f'<p style="margin:0 0 14px;">{html.escape(paragraph)}</p>')
         if section.bullets:
-            blocks.append("<ul>")
+            blocks.append('<ul style="margin:4px 0 2px;padding-left:1.2em;">')
             for bullet in section.bullets:
-                blocks.append(f"<li>{html.escape(bullet)}</li>")
+                blocks.append(f'<li style="margin:0 0 8px;">{html.escape(bullet)}</li>')
             blocks.append("</ul>")
+        blocks.append("</section>")
     blocks.append("</section>")
     return "\n".join(blocks)
 
 
 def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-

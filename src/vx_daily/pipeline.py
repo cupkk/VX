@@ -50,11 +50,10 @@ def run_daily(root: Path, target_date: date_type, min_score: int | None = None, 
     article_dir = _next_article_dir(root, target_date, final_draft.slug)
     article_dir.mkdir(parents=True, exist_ok=False)
 
-    (article_dir / "article.md").write_text(
-        render_markdown(final_draft, final_score, status), encoding="utf-8"
-    )
+    (article_dir / "article.md").write_text(render_markdown(final_draft, status), encoding="utf-8")
     (article_dir / "article.html").write_text(render_html(final_draft), encoding="utf-8")
     (article_dir / "cover_prompt.txt").write_text(final_draft.cover_prompt, encoding="utf-8")
+    write_json(article_dir / "review.json", final_score.to_dict())
     write_json(article_dir / "score.json", final_score.to_dict())
     write_json(
         article_dir / "metadata.json",

@@ -46,6 +46,8 @@ class ScoreResult:
     details: dict[str, int]
     reasons: list[str]
     rewrite_required: bool
+    hard_blockers: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

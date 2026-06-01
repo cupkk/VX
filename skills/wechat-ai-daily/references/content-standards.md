@@ -19,6 +19,7 @@ The account voice belongs to a technology and internet PhD writing about AI in a
 
 - Start from a real reader problem.
 - Use short sections and concrete examples.
+- When `resource/` or NotebookLM exports are present, choose one article angle from the material and make it drive the title, opening, mechanism, boundary, and source note.
 - Prefer "one small exercise" over broad advice.
 - Use clear technical terms, then explain them plainly.
 - Keep claims modest and verifiable.
@@ -35,3 +36,5 @@ The account voice belongs to a technology and internet PhD writing about AI in a
 - Unverified claims about companies, products, or model releases.
 - Legal, medical, financial, political, or privacy-sensitive advice.
 - Mechanical AI-writing transitions such as "首先、其次、最后、综上所述" when they do not serve a real structure.
+- Publishing local paths, NotebookLM share URLs, WeChat media IDs, API fields, or private response paths in article text.
+- Putting score summaries, cover prompts, or operational audit notes into `article.md`.

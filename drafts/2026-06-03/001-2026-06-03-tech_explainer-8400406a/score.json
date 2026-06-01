@@ -1,0 +1,24 @@
+{
+  "total": 100,
+  "passed": true,
+  "threshold": 85,
+  "details": {
+    "title": 10,
+    "structure": 12,
+    "readability": 14,
+    "warmth": 10,
+    "technical_grounding": 14,
+    "boundary": 10,
+    "actionability": 10,
+    "safety": 12,
+    "image_fit": 6,
+    "source_discipline": 8,
+    "source_grounding": 8
+  },
+  "reasons": [
+    "达到发布预览标准，可进入本地待审。"
+  ],
+  "rewrite_required": false,
+  "hard_blockers": [],
+  "warnings": []
+}

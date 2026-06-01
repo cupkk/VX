@@ -1,61 +1,50 @@
 ---
 name: wechat-ai-daily
-description: Generate one daily AI-themed WeChat public-account draft for the VX repo, ground it in local resource or NotebookLM exports, score it, rewrite if below threshold, archive locally, prepare a built-in imagegen cover, upload to the WeChat draft box when credentials are available, and sync to GitHub. Use when the user asks to produce, review, or continue the daily AI公众号 draft workflow in D:\github\VX.
+description: Use when producing, reviewing, improving, previewing, or uploading daily AI-themed WeChat public-account drafts in D:\github\VX, especially when local resource notes or NotebookLM exports should ground the article.
 ---
 
 # WeChat AI Daily
 
 ## Overview
 
-Produce one warm, practical, technically clear AI article draft per day for a personal WeChat public account. Use local resources or NotebookLM exports as the knowledge base. Keep the workflow score-gated and stop at the WeChat draft box for manual review before publishing.
+Generate one publication-ready AI article draft per day for a personal WeChat public account. The draft must be grounded in `resource/`, pass the editorial gate, render cleanly for mobile WeChat reading, then stop in the WeChat draft box for human review.
 
 ## Workflow
 
 1. Work in `D:\github\VX`.
-2. Read useful files under `resource/`; prefer project notes and `resource/notebooklm/exports/`.
-3. Run `python scripts\run_daily.py`.
-4. Inspect the generated folder under `drafts/YYYY-MM-DD/`.
-5. Read `score.json`; if the score is below 85, the pipeline should already have retried up to its max attempts.
-6. Use built-in `image_gen` to generate a cover from `cover_prompt.txt`, then save it as `cover.png` in the same draft folder.
-7. Review `article.md` and `article.html`.
-8. Run `python scripts\upload_wechat_draft.py --article-dir <draft_dir> --dry-run`.
-9. When WeChat credentials and account permissions are available, rerun without `--dry-run` to upload to the WeChat draft box.
-10. Commit and push with `powershell -ExecutionPolicy Bypass -File scripts\sync_github.ps1`.
+2. Inspect `resource/`, prioritizing project notes and `resource/notebooklm/exports/`.
+3. Choose one article angle from the material. Do not append resource notes as a generic extra section.
+4. Run `python scripts\run_daily.py`.
+5. Inspect `article.md`, `article.html`, `review.json`, `metadata.json`, and `cover_prompt.txt`.
+6. If `review.json.passed=false` or `hard_blockers` is non-empty, rewrite before any upload.
+7. Use built-in imagegen with `cover_prompt.txt`, save `cover_raw.png`, crop or resize to `cover.png` at 16:9.
+8. Preview `article.html`; check mobile readability, paragraph length, headings, source note, and no local path leaks.
+9. Run `python scripts\upload_wechat_draft.py --article-dir <draft_dir> --dry-run`.
+10. Upload without `--dry-run` only after the preview is publication-ready and credentials are available.
+11. Commit and push with `powershell -ExecutionPolicy Bypass -File scripts\sync_github.ps1`.
 
-## Content Rules
+## Hard Rules
 
 - Daily count is exactly 1.
-- Minimum score is 85; drafts below that must be rewritten before becoming review-ready.
-- The author persona is practical, positive, optimistic, kind, and authentic. Express it through examples, judgment, and tone. Do not list personality labels in the article.
-- Technical explanations should start from intuition, then mechanism, then one small exercise.
-- Keep the text warm and human, not hype-driven.
-- Avoid medical, financial, legal, political, privacy, and exaggerated-result claims unless handled as careful disclaimers.
-- Never commit AppSecret, `OPENAI_API_KEY`, cookies, tokens, or `.env` files.
+- Minimum score is 85. Below 85 must rewrite.
+- Any hard blocker means no WeChat upload.
+- `article.md` is the clean publication manuscript. Audit data belongs in `review.json`; cover prompt belongs in `cover_prompt.txt`.
+- Never publish local paths, NotebookLM URLs, material IDs, tokens, credentials, or private response JSON.
+- Never call the publish API. The user manually reviews and publishes from the WeChat draft box.
 
-## Imagegen Cover Step
+## Content Protocol
 
-Use the built-in image generation tool, not an API key, for covers. Prompt from `cover_prompt.txt` and save the selected bitmap into the draft folder as `cover.png`.
-
-Preferred cover style:
-- warm modern hand-drawn digital illustration
-- light technology notebook style
-- no text, no logo, no watermark
-- practical, optimistic, human-centered AI mood
-
-## Publishing Boundary
-
-This repo is for a personal public account. Upload review-ready content to the WeChat draft box when API credentials and account permissions are available. Do not call the publish API: the user reviews and publishes manually. If the account does not have draft API access, keep the local archive and manual copy/paste fallback.
-
-## Useful Commands
-
-```powershell
-cd D:\github\VX
-python scripts\run_daily.py
-python scripts\upload_wechat_draft.py --article-dir <draft_dir> --dry-run
-python -m unittest discover -s tests
-powershell -ExecutionPolicy Bypass -File scripts\sync_github.ps1
-```
+- Start from a real reader problem, not a broad trend opening.
+- Use this structure when possible: scene -> intuition -> mechanism -> example -> boundary -> small exercise -> source note.
+- Express the author's practical, positive, kind voice through judgment and examples. Do not list persona labels.
+- Prefer clear tradeoffs over hype. Avoid absolute claims such as "完全无损", "所有场景最优", "彻底淘汰".
+- Before upload, do a humanizer pass: remove mechanical transitions, generic conclusions, vague authority, over-bolded list headers, and template rhythm.
 
 ## References
 
-For detailed style and safety notes, read `references/content-standards.md` when adjusting generation or scoring rules.
+- `references/content-standards.md`
+- `references/editorial-quality-gate.md`
+- `references/wechat-layout.md`
+- `references/humanizer-checklist.md`
+
+Useful external inspiration: `geekjourneyx/md2wechat-skill`, Doocs Markdown, Markdown Nice, and public AI-writing cleanup checklists. Treat them as inspiration; the VX gate and local resource grounding rules take priority.

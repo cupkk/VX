@@ -1,0 +1,49 @@
+<section data-vx-theme="wechat-ai-daily" style="font-size:16px;line-height:1.85;color:#242424;letter-spacing:0;word-break:break-word;">
+<h1 style="font-size:22px;line-height:1.4;margin:0 0 14px;font-weight:700;color:#111;">为什么大模型越聊越卡？</h1>
+<blockquote style="margin:16px 0 22px;padding:12px 16px;background:#f6f7f8;border-left:4px solid #4f7f73;color:#3d3d3d;border-radius:4px;">用桌面笔记的例子，讲清楚 KV Cache 为什么会让长上下文推理越来越吃显存。</blockquote>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">先从一个卡顿说起</h2>
+<p style="margin:0 0 14px;">你和一个大模型聊得越久，它未必是在“变笨”，更常见的问题是：它要带着越来越长的上下文继续往下写。</p>
+<p style="margin:0 0 14px;">我更愿意把 KV Cache 理解成一本摊在桌上的笔记。它帮模型少做重复计算，但笔记越摊越多，显存这张桌子也会越来越挤。</p>
+</section>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">直觉：缓存是在省时间，也是在占空间</h2>
+<p style="margin:0 0 14px;">Transformer 每生成一个新 token，都要回看前面内容。没有缓存，它会反复重算；有了 KV Cache，它可以把已经算过的 Key 和 Value 留下来复用。</p>
+<p style="margin:0 0 14px;">这听起来很划算。代价是，长上下文会让缓存持续增长；高并发时，很多人的对话缓存一起放进显存，压力就会很快出现。我们看到的卡顿，常常就藏在这笔账里。</p>
+</section>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">PagedAttention 解决的不是魔法问题</h2>
+<p style="margin:0 0 14px;">PagedAttention 的直觉很像操作系统分页：不要给每个请求预留一大块连续显存，而是把缓存拆成小块，需要多少就拼多少。</p>
+<p style="margin:0 0 14px;">比如餐厅排座位，整桌预留容易浪费；把座位拆细，翻台率会更高。对应到推理服务里，它主要缓解多并发下的显存碎片和利用率问题。</p>
+<ul style="margin:4px 0 2px;padding-left:1.2em;">
+<li style="margin:0 0 8px;">它更关心显存利用率，不等于单个请求一定更快。</li>
+<li style="margin:0 0 8px;">它适合服务很多变长请求，但低并发、极低延迟场景要看额外查表开销。</li>
+<li style="margin:0 0 8px;">它是工程调度方法，不是让模型理解能力突然变强的算法。</li>
+</ul>
+</section>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">哪些记忆可以瘦身</h2>
+<p style="margin:0 0 14px;">KV Cache 压缩的难点在于，不是所有 token 都一样重要。很多工作会尝试保留开头、最近内容、注意力很重的 token，再丢掉影响较小的部分。</p>
+<p style="margin:0 0 14px;">Attention Sinks、Heavy Hitters、H2O、Scissorhands 这些名字背后，讨论的都是同一个朴素问题：哪些内容必须留下，哪些内容可以用较小代价放手。</p>
+</section>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">量化也要看 Key 和 Value 的脾气</h2>
+<p style="margin:0 0 14px;">把 KV Cache 压到 4-bit 或 2-bit，直觉上像图片压缩。但 AI 的“记忆”里有离群值，不能简单一刀切。</p>
+<p style="margin:0 0 14px;">一些资料会区分 Key 和 Value 的分布：Key 更容易受离群通道影响，Value 相对平滑。KVQuant、KIVI、RotateKV 这类方法，本质上是在更细地处理这种差异。</p>
+</section>
+<section style="margin:28px 0 0;padding:14px 16px;background:#f7f8f5;border-left:4px solid #6f8f72;border-radius:4px;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">边界：别把优化写成万能药</h2>
+<p style="margin:0 0 14px;">这里最容易误解的一点是：缓存优化不是免费午餐。它通常是在吞吐、延迟、精度和成本之间换一个更适合当前业务的平衡点。</p>
+<p style="margin:0 0 14px;">MLA 这类架构级优化也不是能直接装到任意已有模型上的插件。数学推理、长链路 CoT 任务对激进缓存驱逐更敏感，不能只看省了多少显存。</p>
+</section>
+<section style="margin:30px 0 0;padding:0;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">今天可以练一下</h2>
+<p style="margin:0 0 14px;">下次看到一篇推理优化论文或工程博客，先写三句话：它省了什么资源，付出了什么代价，在哪些场景不适合。</p>
+<p style="margin:0 0 14px;">这个小检查很务实。我自己读系统论文时也常用它：先把兴奋感放一放，再判断一个方案能不能放进自己的系统。</p>
+</section>
+<section style="margin:28px 0 0;padding:14px 16px;background:#f7f8f5;border-left:4px solid #6f8f72;border-radius:4px;">
+<h2 style="font-size:18px;line-height:1.45;margin:0 0 12px;font-weight:700;color:#1f3d36;">来源与边界</h2>
+<p style="margin:0 0 14px;">本文依据本地知识库整理的 KV Cache 主题笔记，并优先采用论文、官方文档和开源项目 README 作为后续核验来源。</p>
+<p style="margin:0 0 14px;">文中不宣称任何方法完全无损，也不把单篇论文结论外推成商业承诺；涉及具体数值时，应回到原文确认模型规模、上下文长度和测试设置。</p>
+</section>
+</section>
