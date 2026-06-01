@@ -55,8 +55,8 @@ def _multipart_request(url: str, field_name: str, file_path: Path) -> dict[str, 
 
 
 def get_access_token(app_id: str | None = None, app_secret: str | None = None) -> str:
-    app_id = app_id or os.environ.get("WECHAT_APP_ID")
-    app_secret = app_secret or os.environ.get("WECHAT_APP_SECRET")
+    app_id = app_id or os.environ.get("WECHAT_APP_ID") or os.environ.get("APP_ID")
+    app_secret = app_secret or os.environ.get("WECHAT_APP_SECRET") or os.environ.get("APP_SECRET")
     if not app_id or not app_secret:
         raise WeChatApiError("Missing WECHAT_APP_ID or WECHAT_APP_SECRET environment variable.")
 

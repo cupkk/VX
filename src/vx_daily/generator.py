@@ -31,7 +31,17 @@ def _resource_section(resource_context: dict[str, Any]) -> Section | None:
         return None
 
     first = files[0]
-    excerpt = str(first.get("excerpt", "")).replace("\n", " ")
+    raw_lines = str(first.get("excerpt", "")).splitlines()
+    useful_lines = [
+        line.strip(" -")
+        for line in raw_lines
+        if line.strip()
+        and not line.startswith("#")
+        and "notebooklm.google.com" not in line
+        and not line.startswith("导出时间")
+        and not line.startswith("来源 notebook")
+    ]
+    excerpt = " ".join(useful_lines[:2])
     if len(excerpt) > 180:
         excerpt = excerpt[:180].rstrip() + "..."
 

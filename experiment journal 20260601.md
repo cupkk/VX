@@ -126,3 +126,25 @@
 - 秘密扫描初次误报 `access_token`、`app_secret` 等正常变量名，以及微信请求体中的固定字段名。已修正 `scripts/sync_github.ps1` 的扫描规则，只拦截字段后跟疑似密钥值的情况。
 - 重新运行秘密扫描：未发现疑似密钥字段。
 - 当前状态：草稿箱上传代码已可生成请求体；真实调用仍待公众号凭据和账号接口权限验证。
+
+## NotebookLM 与微信真实上传推进（2026-06-01 13:36 +08:00）
+
+- 用户提供 NotebookLM 链接，要求走通 NotebookLM 知识库路径和微信公众号草稿箱上传路径。
+- NotebookLM 状态：
+  - 已通过 NotebookLM MCP 完成 Google 登录，`authenticated=true`。
+  - 对 notebook 提问成功，确认主题为“大语言模型推理阶段中 KV Cache 压缩评估与全面优化技术”。
+  - 已抽取 6 个公众号连载选题和关键事实边界。
+  - 已保存导出资料：`resource/notebooklm/exports/kv-cache-optimization-20260601.md`。
+  - 已基于该资源重新运行日更流水线，生成草稿：`drafts/2026-06-02/002-2026-06-02-tech_explainer-1bb99ad7/`。
+  - 该草稿 `metadata.json` 已记录 `resource_context.status=loaded`，使用来源为 `resource/notebooklm/exports/kv-cache-optimization-20260601.md`。
+  - 已对该草稿执行微信上传 dry-run，生成 `wechat_draft_payload.dry_run.json`。
+- 微信公众号真实上传状态：
+  - 用户提供了公众号 AppID 和 AppSecret；本轮只在当前命令进程环境中使用，未写入文件、日志或仓库。
+  - 调用真实微信接口失败，错误码 `40164`，微信返回调用 IP `39.174.145.41` 不在白名单。
+  - 普通公网 IP 查询得到 `160.16.119.69`，但微信接口实际识别的出口 IP 是 `39.174.145.41`。后续白名单应以微信错误返回的 IP 为准。
+  - 已提示用户在微信公众号后台“设置 API IP 白名单”中填写 `39.174.145.41` 并确认。
+- 当前 blocker：
+  - 未完成真实上传到微信公众号草稿箱，因为必须先由用户在微信公众平台后台设置 API IP 白名单。
+- 下一步：
+  - 用户确认白名单已保存后，重新运行真实上传命令。
+  - 上传成功后检查草稿箱，并把 `wechat_cover_response.json`、`wechat_draft_response.json` 和更新后的 `metadata.json` 同步到 GitHub。
