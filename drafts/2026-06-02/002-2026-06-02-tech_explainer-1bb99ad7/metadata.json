@@ -132,9 +132,13 @@
   ],
   "image_generation": {
     "mode": "codex_builtin_imagegen",
-    "status": "prompt_ready",
+    "status": "generated",
     "prompt_file": "cover_prompt.txt",
-    "target_file": "cover.png"
+    "target_file": "cover.png",
+    "cover_file": "cover.png",
+    "raw_file": "cover_raw.png",
+    "generated_source": "C:\\Users\\18103\\.codex\\generated_images\\019e8140-39a0-7180-bc8e-39979f63c8bd\\ig_07d36796431369cd016a1d1c188f708195bddd756a01fdee12.png",
+    "cover_dimensions": "1024x576"
   },
   "resource_context": {
     "status": "loaded",
@@ -144,8 +148,9 @@
     ]
   },
   "wechat_draft": {
-    "status": "dry_run_ready",
-    "payload_file": "wechat_draft_payload.dry_run.json"
+    "status": "uploaded",
+    "uploaded_at": "2026-06-01T13:48:54",
+    "private_response_dir": "wechat_private"
   },
   "github_sync": {
     "status": "pending",

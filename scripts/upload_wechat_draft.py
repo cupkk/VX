@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -87,14 +88,14 @@ def main() -> int:
     )
     draft_response = add_draft(access_token, payload)
 
-    write_json(article_dir / "wechat_cover_response.json", cover_response)
-    write_json(article_dir / "wechat_draft_response.json", draft_response)
+    private_dir = article_dir / "wechat_private"
+    private_dir.mkdir(exist_ok=True)
+    write_json(private_dir / "wechat_cover_response.json", cover_response)
+    write_json(private_dir / "wechat_draft_response.json", draft_response)
     metadata["wechat_draft"] = {
         "status": "uploaded",
-        "media_id": draft_response.get("media_id"),
-        "cover_media_id": thumb_media_id,
-        "response_file": "wechat_draft_response.json",
-        "cover_response_file": "wechat_cover_response.json",
+        "uploaded_at": datetime.now().isoformat(timespec="seconds"),
+        "private_response_dir": "wechat_private",
     }
     _write_metadata(article_dir, metadata)
     print(f"WeChat draft uploaded: {draft_response.get('media_id')}")

@@ -8,6 +8,8 @@ attempt: 1
 tags: AI, AI 技术解析, 技术科普, 个人思考
 wechat_media_id: 
 cover_media_id: 
+cover_file: cover.png
+cover_raw_file: cover_raw.png
 ---
 
 # 大模型为什么会一本正经地胡说？

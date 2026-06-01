@@ -148,3 +148,28 @@
 - 下一步：
   - 用户确认白名单已保存后，重新运行真实上传命令。
   - 上传成功后检查草稿箱，并把 `wechat_cover_response.json`、`wechat_draft_response.json` 和更新后的 `metadata.json` 同步到 GitHub。
+
+## 两条路径真实闭环完成（2026-06-01 13:49 +08:00）
+
+- 用户已在微信公众号后台设置 API IP 白名单。
+- 微信公众号真实上传已成功：
+  - `drafts/2026-06-01/001-2026-06-01-practical_tip-70657647/` 已上传到微信公众号草稿箱，用于验证基础生成链路。
+  - `drafts/2026-06-02/002-2026-06-02-tech_explainer-1bb99ad7/` 已上传到微信公众号草稿箱，用于验证 NotebookLM 知识库组合链路。
+- NotebookLM 组合闭环已经实际跑通：
+  - NotebookLM notebook 读取。
+  - 导出 KV Cache 优化知识库到 `resource/notebooklm/exports/kv-cache-optimization-20260601.md`。
+  - 流水线读取本地 `resource/` 资料。
+  - 生成文章草稿、自动评分、封面提示词。
+  - 使用 Codex 内置 imagegen 生成第二篇封面图。
+  - 保留 `cover_raw.png`，裁剪生成 `cover.png`，尺寸 `1024x576`。
+  - 上传封面永久素材。
+  - 调用微信 `draft/add` 写入公众号草稿箱。
+- 安全调整：
+  - 公众号凭据只在当前命令进程中临时使用，运行后已清除环境变量。
+  - 微信返回的素材标识不推送到 GitHub。
+  - 已新增 `.gitignore` 规则 `wechat_private/`。
+  - `scripts/upload_wechat_draft.py` 现在将微信原始响应保存在草稿目录下的 `wechat_private/`，仅本地保留。
+  - GitHub 中的 `metadata.json` 只保留 `wechat_draft.status=uploaded`、上传时间和本地私有响应目录名。
+- 当前下一步：
+  - 跑测试、skill 校验、秘密扫描和 Git 状态核验。
+  - 提交并推送本轮真实闭环结果。
