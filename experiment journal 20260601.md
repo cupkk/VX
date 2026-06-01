@@ -247,3 +247,13 @@
 - 检查最新草稿 `metadata.json` 时发现 `github_sync.status` 仍为 `pending`，但公开归档已经实际推送到 GitHub。
 - 已将该字段修正为 `pushed`，并记录远端分支和核验时间，避免后续自动化误判该草稿尚未同步。
 - 本节与元数据修正会一并提交；最终提交哈希以 Git 远端 `origin/main` 为准。
+
+## NotebookLM 技术深度复盘（2026-06-01 16:10 +08:00）
+
+- 用户反馈当前文章大致可用，但技术深度不足，公众号文章必须让读者真正学到东西。
+- 已检查 NotebookLM 插件健康状态：Google 登录有效，`authenticated=true`。
+- 尝试直接向用户提供的 NotebookLM 发起“列出来源和可深挖技术点”的查询，但第一次超时，第二次被 NotebookLM 页面上的 citation tooltip 遮挡查询框，导致自动提问失败。
+- 已改为读取当前仓库已有 NotebookLM 导出：`resource/notebooklm/exports/kv-cache-optimization-20260601.md`。
+- 发现当前导出只有约 4.6KB，属于主题提纲和写作边界，不包含原始论文标题、公式、伪代码、实验表格、配置、指标和精确引用；这会导致生成稿偏科普，不够专业。
+- 当前 notebook 导出可支持的主题包括：KV Cache 显存压力、PagedAttention/vLLM、vAttention、Attention Sinks、Heavy Hitters、H2O、Scissorhands、KVQuant、KIVI、RotateKV、SSD offload、Tutti、DeepSeek-V2 MLA、ShotKV、CoT/GSM8K/MATH-500 等。
+- 后续应升级为“技术卡片抽取”流程：每篇文章先从 NotebookLM/原始资料中抽取机制、公式或复杂度、算法流程、实验设定、指标、边界条件和引用，再进入生成与评分；评分器也应新增技术深度门槛。
