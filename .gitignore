@@ -13,3 +13,4 @@ build/
 *.egg-info/
 tmp/
 wechat_private/
+resource/wechat-import/

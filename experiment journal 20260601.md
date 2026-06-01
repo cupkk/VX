@@ -257,3 +257,24 @@
 - 发现当前导出只有约 4.6KB，属于主题提纲和写作边界，不包含原始论文标题、公式、伪代码、实验表格、配置、指标和精确引用；这会导致生成稿偏科普，不够专业。
 - 当前 notebook 导出可支持的主题包括：KV Cache 显存压力、PagedAttention/vLLM、vAttention、Attention Sinks、Heavy Hitters、H2O、Scissorhands、KVQuant、KIVI、RotateKV、SSD offload、Tutti、DeepSeek-V2 MLA、ShotKV、CoT/GSM8K/MATH-500 等。
 - 后续应升级为“技术卡片抽取”流程：每篇文章先从 NotebookLM/原始资料中抽取机制、公式或复杂度、算法流程、实验设定、指标、边界条件和引用，再进入生成与评分；评分器也应新增技术深度门槛。
+
+## 微信本地文件 AI 资料整理（2026-06-01 18:05 +08:00）
+
+- 用户要求扫描 `D:\xwechat_files\wxid_aiboet0th8j722_aa21\msg\file`，整理 AI、技术、算法相关有用资料到 `D:\github\VX\resource`，并顺便清理重复文件释放空间。
+- 已完成只读盘点：
+  - 初始约 2574 个文件，约 14.784GB。
+  - 主要类型包括 PDF、DOCX、XLSX、PPTX、HTML、ZIP、TXT、MD。
+- 已按 SHA-256 内容哈希识别精确重复文件，并只在源目录内部删除重复副本：
+  - 共删除 332 个精确重复文件，释放约 0.63GB。
+  - 清理后源目录剩余 2238 个文件，约 14.136GB。
+- 已将 AI/技术/算法相关资料复制到本地知识库：
+  - 目录：`resource/wechat-import/20260601/`
+  - 已复制 647 个候选资料，约 3.55GB。
+  - 类型包括 PDF、DOCX、PPTX、HTML、MD、XLSX、TXT、少量 ZIP/PY/IPYNB/TEX/JSON。
+  - 已生成 `summary.json`、`manifest.csv`、`duplicate_deletion_log.csv`、`index.md`。
+- 重要安全决策：
+  - `resource/wechat-import/` 已加入 `.gitignore`，不自动提交到 GitHub。
+  - 原因：微信文件中混有合同、简历、报名表、项目资料、商业材料和大体积文件；本地可作为知识库使用，但公开同步前必须人工筛选或脱敏。
+- 后续建议：
+  - 文章生成器可以读取 `resource/wechat-import/20260601/index.md` 和 `manifest.csv`，先挑选高分资料再抽取“技术卡片”。
+  - 如果要同步到 GitHub，应单独建立一个脱敏后的 `resource/public-curated/`，只放确认可公开的资料或二次整理笔记。
