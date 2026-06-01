@@ -224,3 +224,20 @@
   - `metadata.json` 已更新为 `wechat_draft.status=uploaded`。
   - 微信原始响应保存到本地 `wechat_private/`，该目录受 `.gitignore` 保护，不同步到 GitHub。
 - 下一步：提交并推送公开归档文件，包括 `cover.png`、`cover_raw.png` 和更新后的 `metadata.json`。
+
+## 新质量稿公开归档同步完成（2026-06-01 15:56 +08:00）
+
+- 已完成上传后公开归档同步：
+  - 提交并推送 `cover.png`、`cover_raw.png`、更新后的 `metadata.json` 和交接日志。
+  - 最新远端 `origin/main` 为 `4906daaa9f6d2c90638c5df8b2756420a4732787`。
+  - `git status --short --branch` 显示 `main...origin/main`，无未提交文件。
+- 已验证 Windows 用户级永久环境变量：
+  - `APP_ID` 已存在于 User 环境。
+  - `APP_SECRET` 已存在于 User 环境。
+  - 当前 Codex 进程尚未继承这两个变量，重启 Codex 或终端后会生效；临时执行上传脚本时可在同一个 PowerShell 进程中从 User 环境读入。
+- 安全提醒：
+  - 日志和仓库不记录具体密钥值。
+  - 由于密钥曾在聊天中明文出现，后续建议在微信公众号后台轮换密钥，并更新 User 环境变量。
+- 当前状态：
+  - 本地、GitHub、微信公众号草稿箱三端闭环已打通。
+  - 最新质量稿《为什么大模型越聊越卡？》已经进入微信公众号草稿箱，等待人工审核后手动发表。
