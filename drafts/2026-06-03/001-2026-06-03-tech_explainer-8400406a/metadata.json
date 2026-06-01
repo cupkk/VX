@@ -156,8 +156,9 @@
     ]
   },
   "wechat_draft": {
-    "status": "dry_run_ready",
-    "payload_file": "wechat_draft_payload.dry_run.json"
+    "status": "uploaded",
+    "uploaded_at": "2026-06-01T15:14:51",
+    "private_response_dir": "wechat_private"
   },
   "github_sync": {
     "status": "pending",

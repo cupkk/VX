@@ -210,3 +210,17 @@
 - 本轮同步脚本在提交前执行了暂存区密钥扫描，未中断提交。
 - 推送后 `git status --short --branch` 显示 `main...origin/main`，代码工作区已干净。
 - 注意：本节为提交后的交接补记；最终提交哈希以 Git 历史为准，避免日志反复追写造成无限提交。
+
+## 新质量稿上传到微信公众号草稿箱（2026-06-01 15:15 +08:00）
+
+- 用户要求将最新质量预览稿上传到微信公众号草稿箱。
+- 已为 Windows 用户级永久环境变量写入公众号 `APP_ID` 和 `APP_SECRET`；日志不记录具体密钥值。由于密钥曾在聊天中明文出现，后续建议在公众号后台重置。
+- 上传目标草稿目录：`drafts/2026-06-03/001-2026-06-03-tech_explainer-8400406a/`。
+- 上传前状态：
+  - `review.json` 总分 100，通过，`hard_blockers=[]`，`warnings=[]`。
+  - 已生成 `cover_raw.png`，并裁剪为 16:9 的 `cover.png`，尺寸 `1024x576`。
+- 已调用 `scripts/upload_wechat_draft.py` 执行真实上传，只写入微信公众号草稿箱，未调用发布接口。
+- 上传结果：
+  - `metadata.json` 已更新为 `wechat_draft.status=uploaded`。
+  - 微信原始响应保存到本地 `wechat_private/`，该目录受 `.gitignore` 保护，不同步到 GitHub。
+- 下一步：提交并推送公开归档文件，包括 `cover.png`、`cover_raw.png` 和更新后的 `metadata.json`。
