@@ -84,3 +84,45 @@
   - `gh repo view cupkk/VX --json nameWithOwner,defaultBranchRef,url` 返回仓库 `cupkk/VX`、默认分支 `main`、地址 `https://github.com/cupkk/VX`。
 - 本地状态：`git status -sb` 显示 `main...origin/main`，推送后工作区干净。
 - 注意：本节日志是在首次推送后追加，因此需要再做一次小提交同步日志本身。
+
+## 闭环目标修正与草稿箱上传实现（2026-06-01 12:59 +08:00）
+
+- 用户指出：完整闭环不是到 GitHub 结束，而是要把合格文章上传到微信公众号草稿箱；GitHub 只是归档和同步。
+- 用户指出：正文中不应出现“作为一个务实、积极、乐观、善良、真实的人”这种显式人设标签。决策：人设只通过例子、判断、措辞和边界感体现，不直接罗列性格词。
+- 已修改生成器和评分器：
+  - `src/vx_daily/generator.py` 不再拼接 persona 标签。
+  - `src/vx_daily/scoring.py` 会把显式罗列性格标签视为扣分原因。
+  - 已同步修正首篇样例草稿的 `article.md`、`article.html`、`metadata.json`。
+- 已新增 `resource/` 知识库入口：
+  - `resource/inbox/`
+  - `resource/projects/`
+  - `resource/notebooklm/exports/`
+  - `resource/style-guides/wechat-writing.md`
+- 已新增 `src/vx_daily/resources.py`，流水线会读取 `resource/` 下的 `.md`、`.txt`、`.json` 文件，并把使用到的素材文件写入 `metadata.json`。
+- 已检查 NotebookLM 插件状态：MCP 插件可用，但当前 Google/NotebookLM 未登录，`authenticated=false`。后续需要用户登录或提供 NotebookLM share link 后才能读取项目知识库。
+- 已新增微信公众号草稿箱上传脚本：
+  - `src/vx_daily/wechat_api.py`
+  - `scripts/upload_wechat_draft.py`
+- 微信接口实现边界：
+  - 通过 `cover.png` 上传永久图片素材，获取封面 `media_id`。
+  - 调用微信 `draft/add` 将文章写入草稿箱。
+  - 不调用发布接口，发布仍由用户人工检查后执行。
+  - 实际上传需要本机环境变量提供公众号 AppID/AppSecret，不能把凭据写入仓库。
+- 已执行 dry-run：
+  - `python scripts\upload_wechat_draft.py --article-dir drafts\2026-06-01\001-2026-06-01-practical_tip-70657647 --dry-run`
+  - 产物：`drafts/2026-06-01/001-2026-06-01-practical_tip-70657647/wechat_draft_payload.dry_run.json`
+  - 说明：微信草稿请求体可生成；真实上传尚未执行，因为当前没有公众号 API 凭据。
+- 当前下一步：
+  - 运行完整测试、skill 校验和秘密扫描。
+  - 提交并推送本轮改动。
+  - 用户后续在本机设置公众号凭据后，执行无 `--dry-run` 的上传命令测试真实草稿箱写入。
+
+## 草稿箱上传 dry-run 验证（2026-06-01 13:03 +08:00）
+
+- 运行 `python -m unittest discover -s tests`：通过，4 个测试。
+- 运行 `python -X utf8 C:\Users\18103\.codex\skills\.system\skill-creator\scripts\quick_validate.py D:\github\VX\skills\wechat-ai-daily`：通过。
+- 运行微信上传 dry-run：通过，生成 `wechat_draft_payload.dry_run.json`。
+- 复查首篇文章和生成器：未再出现显式人设标签句。
+- 秘密扫描初次误报 `access_token`、`app_secret` 等正常变量名，以及微信请求体中的固定字段名。已修正 `scripts/sync_github.ps1` 的扫描规则，只拦截字段后跟疑似密钥值的情况。
+- 重新运行秘密扫描：未发现疑似密钥字段。
+- 当前状态：草稿箱上传代码已可生成请求体；真实调用仍待公众号凭据和账号接口权限验证。

@@ -23,6 +23,8 @@ The account voice belongs to a technology and internet PhD writing about AI in a
 - Use clear technical terms, then explain them plainly.
 - Keep claims modest and verifiable.
 - Let the author's personality show through small first-person reflections.
+- Do not explicitly list persona labels such as "务实、积极、乐观、善良、真实".
+- Ground project articles in `resource/` or NotebookLM exports, but only include information that is safe to publish.
 
 ## Avoid
 
@@ -32,3 +34,4 @@ The account voice belongs to a technology and internet PhD writing about AI in a
 - Clickbait title patterns.
 - Unverified claims about companies, products, or model releases.
 - Legal, medical, financial, political, or privacy-sensitive advice.
+- Mechanical AI-writing transitions such as "首先、其次、最后、综上所述" when they do not serve a real structure.

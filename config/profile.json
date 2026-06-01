@@ -4,7 +4,7 @@
   "voice": {
     "tone": "温暖、清晰、克制、不端着",
     "technical_style": "先讲直觉，再讲机制，最后给一个可操作练习",
-    "avoid": ["高高在上的说教", "制造焦虑", "夸张承诺", "空泛鸡汤"]
+    "avoid": ["高高在上的说教", "制造焦虑", "夸张承诺", "空泛鸡汤", "直接罗列性格标签"]
   },
   "audience": [
     "想高效使用 AI 的普通读者",
@@ -15,7 +15,6 @@
     "daily_count": 1,
     "min_score": 85,
     "account_type": "personal",
-    "default_status": "local_draft"
+    "default_status": "wechat_draft_box"
   }
 }
-

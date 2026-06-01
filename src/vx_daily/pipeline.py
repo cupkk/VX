@@ -7,6 +7,7 @@ from pathlib import Path
 from .config import load_project_config
 from .generator import generate_draft
 from .rendering import render_html, render_markdown, write_json
+from .resources import load_resource_context
 from .scoring import score_draft
 
 
@@ -21,13 +22,20 @@ def _next_article_dir(root: Path, target_date: date_type, slug: str) -> Path:
 def run_daily(root: Path, target_date: date_type, min_score: int | None = None, max_attempts: int = 3) -> Path:
     config = load_project_config(root)
     threshold = min_score or int(config.profile["publishing"]["min_score"])
+    resource_context = load_resource_context(root)
 
     attempts = []
     final_draft = None
     final_score = None
 
     for attempt in range(1, max_attempts + 1):
-        draft = generate_draft(config.profile, config.topics, target_date, attempt=attempt)
+        draft = generate_draft(
+            config.profile,
+            config.topics,
+            target_date,
+            attempt=attempt,
+            resource_context=resource_context,
+        )
         score = score_draft(draft, config.policy, threshold)
         attempts.append({"attempt": attempt, "score": score.to_dict(), "title": draft.title})
         final_draft = draft
@@ -64,6 +72,15 @@ def run_daily(root: Path, target_date: date_type, min_score: int | None = None, 
                 "prompt_file": "cover_prompt.txt",
                 "target_file": "cover.png",
             },
+            "resource_context": {
+                "status": "loaded" if resource_context["files"] else "empty",
+                "file_count": len(resource_context["files"]),
+                "files": [item["path"] for item in resource_context["files"]],
+            },
+            "wechat_draft": {
+                "status": "pending_upload",
+                "command": "python scripts\\upload_wechat_draft.py --article-dir <draft_dir>",
+            },
             "github_sync": {
                 "status": "pending",
                 "command": "powershell -ExecutionPolicy Bypass -File scripts\\sync_github.ps1",
@@ -71,4 +88,3 @@ def run_daily(root: Path, target_date: date_type, min_score: int | None = None, 
         },
     )
     return article_dir
-

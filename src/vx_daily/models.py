@@ -31,6 +31,7 @@ class ArticleDraft:
     sections: list[Section]
     attempt: int
     tags: list[str]
+    resource_context: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -48,4 +49,3 @@ class ScoreResult:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
-

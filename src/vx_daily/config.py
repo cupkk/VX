@@ -14,7 +14,7 @@ class ProjectConfig:
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    with path.open("r", encoding="utf-8") as handle:
+    with path.open("r", encoding="utf-8-sig") as handle:
         return json.load(handle)
 
 
@@ -25,4 +25,3 @@ def load_project_config(root: Path) -> ProjectConfig:
         policy=read_json(config_dir / "policy.json"),
         topics=read_json(config_dir / "topics.json"),
     )
-

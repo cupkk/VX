@@ -32,11 +32,17 @@ def score_draft(draft: ArticleDraft, policy: dict, threshold: int) -> ScoreResul
     if details["readability"] < 14:
         reasons.append("例子或解释还不够浅显。")
 
+    explicit_persona_terms = ["作为一个务实", "务实、积极", "善良、真实的人", "我是一个"]
+    explicit_persona_hits = [term for term in explicit_persona_terms if term in text]
+
     warmth_terms = ["我", "我们", "你", "希望", "相信", "温度", "焦虑", "方向"]
     warmth_hits = sum(1 for term in warmth_terms if term in text)
-    details["warmth"] = 12 if warmth_hits >= 5 else 7
+    details["warmth"] = 12 if warmth_hits >= 5 and not explicit_persona_hits else 7
     if details["warmth"] < 12:
-        reasons.append("个人真实感和温度还不够。")
+        if explicit_persona_hits:
+            reasons.append("人设应通过表达体现，不要把性格标签直接写进正文。")
+        else:
+            reasons.append("个人真实感和温度还不够。")
 
     tech_hits = sum(1 for term in draft.topic.technical_terms if term in text)
     details["technical_grounding"] = 16 if tech_hits >= min(3, len(draft.topic.technical_terms)) else 9

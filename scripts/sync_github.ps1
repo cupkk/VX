@@ -15,7 +15,11 @@ if (-not $status) {
 git add .
 
 $staged = git diff --cached --name-only
-$secretScan = git diff --cached | Select-String -Pattern "(AppSecret|OPENAI_API_KEY|api_key|password|secret|token)\s*[:=]" -CaseSensitive:$false
+$secretPatterns = @(
+  '(?<![A-Za-z0-9_])["'']?(AppSecret|OPENAI_API_KEY|WECHAT_APP_SECRET|WECHAT_ACCESS_TOKEN|api_key|password|secret|token)["'']?\s*[:=]\s*["''][^"'']{8,}["'']',
+  '(?<![A-Za-z0-9_])(AppSecret|OPENAI_API_KEY|WECHAT_APP_SECRET|WECHAT_ACCESS_TOKEN|api_key|password|secret|token)\s*=\s*\S{8,}'
+)
+$secretScan = git diff --cached | Select-String -Pattern $secretPatterns -CaseSensitive:$false
 if ($secretScan) {
   git reset
   Write-Error "Potential secret found in staged diff. Review before committing."

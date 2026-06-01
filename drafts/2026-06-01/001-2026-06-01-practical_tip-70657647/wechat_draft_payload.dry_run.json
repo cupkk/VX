@@ -1,0 +1,14 @@
+{
+  "articles": [
+    {
+      "article_type": "news",
+      "title": "把复杂任务交给 AI 前，先写清楚验收标准",
+      "author": "科技互联网博士",
+      "digest": "AI 实用技巧：用一个真实问题讲清楚 任务拆解，并给出一个可立即练习的小方法。",
+      "content": "<section style=\"font-size:16px;line-height:1.85;color:#222;\">\n<h1 style=\"font-size:22px;line-height:1.4;\">把复杂任务交给 AI 前，先写清楚验收标准</h1>\n<blockquote style=\"margin:16px 0;padding:12px 16px;background:#f7f7f7;border-left:4px solid #7aa874;\">AI 实用技巧：用一个真实问题讲清楚 任务拆解，并给出一个可立即练习的小方法。</blockquote>\n<h2 style=\"font-size:19px;margin-top:28px;\">先说一句人话</h2>\n<p>今天想聊一个很实际的问题：为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？我希望这篇文章不只是把概念讲清楚，也能给你一个明天就能试的小动作。</p>\n<p>我的理解是：好技术最后都应该回到人的问题上。AI 实用技巧不是为了显得厉害，而是为了帮我们少走一点弯路。</p>\n<h2 style=\"font-size:19px;margin-top:28px;\">把概念拆开看</h2>\n<p>这件事可以先抓住四个关键词：任务拆解、验收标准、上下文、提示词。如果这些词一开始看着有点陌生，没关系，我们先把它们当成工具箱里的几个抽屉。</p>\n<p>真正重要的是知道什么时候打开哪个抽屉，而不是一上来背定义。</p>\n<ul>\n<li>先问：我要解决的具体问题是什么？</li>\n<li>再问：AI 需要哪些上下文才不会乱猜？</li>\n<li>最后问：我怎样判断答案算不算合格？</li>\n</ul>\n<h2 style=\"font-size:19px;margin-top:28px;\">一个小例子</h2>\n<p>比如你想让 AI 帮你解释一段论文，直接说“帮我总结”通常会得到一段看似完整但不一定可用的回答。</p>\n<p>更好的问法是：先让它列出核心问题，再让它用生活例子解释，最后要求它标出哪些地方需要查原文确认。</p>\n<h2 style=\"font-size:19px;margin-top:28px;\">技术背后的直觉</h2>\n<p>很多大模型能力看起来像魔法，本质上仍然是模式学习、概率选择和上下文对齐的组合。</p>\n<p>我们不需要把每个公式都背下来，但要知道：模型越缺少边界，越容易把“听起来合理”误当成“真的可靠”。</p>\n<h2 style=\"font-size:19px;margin-top:28px;\">今天可以练一下</h2>\n<p>给自己找一个正在拖延的小任务，写下三句话：目标是什么、材料有哪些、怎样算完成。</p>\n<p>然后把这三句话交给 AI，让它先反问你缺失的信息。这个动作很小，但会明显提高回答质量。</p>\n<h2 style=\"font-size:19px;margin-top:28px;\">最后</h2>\n<p>我一直相信，技术文章可以严谨，也可以有温度。复杂问题不必写得吓人，先把边界讲清楚，再给一个能动手的小练习。</p>\n<p>如果这篇文章能帮你少一点焦虑，多一点可执行的方向，它就有价值。</p>\n</section>\n",
+      "thumb_media_id": "DRY_RUN_THUMB_MEDIA_ID",
+      "need_open_comment": 0,
+      "only_fans_can_comment": 0
+    }
+  ]
+}

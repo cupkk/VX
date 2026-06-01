@@ -1,137 +1,136 @@
-﻿{
-    "created_at":  "2026-06-01T12:18:46",
-    "date":  "2026-06-01",
-    "status":  "ready_for_review",
-    "daily_count":  1,
-    "account_type":  "personal",
-    "draft":  {
-                  "title":  "把复杂任务交给 AI 前，先写清楚验收标准",
-                  "slug":  "2026-06-01-practical_tip-70657647",
-                  "date":  "2026-06-01",
-                  "topic":  {
-                                "category":  "practical_tip",
-                                "category_label":  "AI 实用技巧",
-                                "title_seed":  "把复杂任务交给 AI 前，先写清楚验收标准",
-                                "core_question":  "为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？",
-                                "technical_terms":  [
-                                                        "任务拆解",
-                                                        "验收标准",
-                                                        "上下文",
-                                                        "提示词"
-                                                    ]
-                            },
-                  "summary":  "AI 实用技巧：用一个真实问题讲清楚 任务拆解，并给出一个可立即练习的小方法。",
-                  "cover_prompt":  "Use case: scientific-educational\nAsset type: WeChat article cover image\nPrimary request: A warm, clean editorial illustration for an AI article about 把复杂任务交给 AI 前，先写清楚验收标准.\nStyle/medium: modern hand-drawn digital illustration, light technology notebook style\nComposition/framing: 16:9 landscape, centered desk scene with laptop, notes, simple AI concept diagram, generous whitespace\nLighting/mood: soft daylight, optimistic, practical, human-centered\nColor palette: warm white, graphite, calm green, small blue accents\nText: no text, no logo\nAvoid: hype, cyberpunk, dark mood, excessive robots, watermark\n",
-                  "sections":  [
-                                   {
-                                       "heading":  "先说一句人话",
-                                       "paragraphs":  [
-                                                          "今天想聊一个很实际的问题：为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？我希望这篇文章不只是把概念讲清楚，也能给你一个明天就能试的小动作。",
-                                                          "我的理解是：好技术最后都应该回到人的问题上。AI 实用技巧不是为了显得厉害，而是为了帮我们少走一点弯路。"
-                                                      ],
-                                       "bullets":  [
-
-                                                   ]
-                                   },
-                                   {
-                                       "heading":  "把概念拆开看",
-                                       "paragraphs":  [
-                                                          "这件事可以先抓住四个关键词：任务拆解、验收标准、上下文、提示词。如果这些词一开始看着有点陌生，没关系，我们先把它们当成工具箱里的几个抽屉。",
-                                                          "真正重要的是知道什么时候打开哪个抽屉，而不是一上来背定义。"
-                                                      ],
-                                       "bullets":  [
-                                                       "先问：我要解决的具体问题是什么？",
-                                                       "再问：AI 需要哪些上下文才不会乱猜？",
-                                                       "最后问：我怎样判断答案算不算合格？"
-                                                   ]
-                                   },
-                                   {
-                                       "heading":  "一个小例子",
-                                       "paragraphs":  [
-                                                          "比如你想让 AI 帮你解释一段论文，直接说“帮我总结”通常会得到一段看似完整但不一定可用的回答。",
-                                                          "更好的问法是：先让它列出核心问题，再让它用生活例子解释，最后要求它标出哪些地方需要查原文确认。"
-                                                      ],
-                                       "bullets":  [
-
-                                                   ]
-                                   },
-                                   {
-                                       "heading":  "技术背后的直觉",
-                                       "paragraphs":  [
-                                                          "很多大模型能力看起来像魔法，本质上仍然是模式学习、概率选择和上下文对齐的组合。",
-                                                          "我们不需要把每个公式都背下来，但要知道：模型越缺少边界，越容易把“听起来合理”误当成“真的可靠”。"
-                                                      ],
-                                       "bullets":  [
-
-                                                   ]
-                                   },
-                                   {
-                                       "heading":  "今天可以练一下",
-                                       "paragraphs":  [
-                                                          "给自己找一个正在拖延的小任务，写下三句话：目标是什么、材料有哪些、怎样算完成。",
-                                                          "然后把这三句话交给 AI，让它先反问你缺失的信息。这个动作很小，但会明显提高回答质量。"
-                                                      ],
-                                       "bullets":  [
-
-                                                   ]
-                                   },
-                                   {
-                                       "heading":  "最后",
-                                       "paragraphs":  [
-                                                          "我一直相信，技术文章可以严谨，也可以有温度。作为一个务实、积极、乐观、善良、真实的人，我更愿意把复杂问题讲得朴素一点。",
-                                                          "如果这篇文章能帮你少一点焦虑，多一点可执行的方向，它就有价值。"
-                                                      ],
-                                       "bullets":  [
-
-                                                   ]
-                                   }
-                               ],
-                  "attempt":  1,
-                  "tags":  [
-                               "AI",
-                               "AI 实用技巧",
-                               "技术科普",
-                               "个人思考"
-                           ]
-              },
-    "attempts":  [
-                     {
-                         "attempt":  1,
-                         "score":  {
-                                       "total":  100,
-                                       "passed":  true,
-                                       "threshold":  85,
-                                       "details":  {
-                                                       "title":  10,
-                                                       "structure":  14,
-                                                       "readability":  14,
-                                                       "warmth":  12,
-                                                       "technical_grounding":  16,
-                                                       "actionability":  10,
-                                                       "safety":  12,
-                                                       "image_fit":  6,
-                                                       "source_discipline":  6
-                                                   },
-                                       "reasons":  [
-                                                       "达到入库标准，可保存为本地待审稿。"
-                                                   ],
-                                       "rewrite_required":  false
-                                   },
-                         "title":  "把复杂任务交给 AI 前，先写清楚验收标准"
-                     }
-                 ],
-    "image_generation":  {
-                             "mode":  "codex_builtin_imagegen",
-                             "status":  "generated",
-                             "prompt_file":  "cover_prompt.txt",
-                             "target_file":  "cover.png",
-                             "cover_file":  "cover.png",
-                             "raw_file":  "cover_raw.png",
-                             "generated_source":  "C:\\Users\\18103\\.codex\\generated_images\\019e8140-39a0-7180-bc8e-39979f63c8bd\\ig_05fca9b6e7344311016a1d08beb6c08197b43fa58b725b887a.png",
-                             "cover_dimensions":  "1024x576"
-                         },
-    "github_sync":  {
-                        "status":  "pending",
-                        "command":  "powershell -ExecutionPolicy Bypass -File scripts\\sync_github.ps1"
-                    }
+{
+  "created_at": "2026-06-01T12:18:46",
+  "date": "2026-06-01",
+  "status": "ready_for_review",
+  "daily_count": 1,
+  "account_type": "personal",
+  "draft": {
+    "title": "把复杂任务交给 AI 前，先写清楚验收标准",
+    "slug": "2026-06-01-practical_tip-70657647",
+    "date": "2026-06-01",
+    "topic": {
+      "category": "practical_tip",
+      "category_label": "AI 实用技巧",
+      "title_seed": "把复杂任务交给 AI 前，先写清楚验收标准",
+      "core_question": "为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？",
+      "technical_terms": [
+        "任务拆解",
+        "验收标准",
+        "上下文",
+        "提示词"
+      ]
+    },
+    "summary": "AI 实用技巧：用一个真实问题讲清楚 任务拆解，并给出一个可立即练习的小方法。",
+    "cover_prompt": "Use case: scientific-educational\nAsset type: WeChat article cover image\nPrimary request: A warm, clean editorial illustration for an AI article about 把复杂任务交给 AI 前，先写清楚验收标准.\nStyle/medium: modern hand-drawn digital illustration, light technology notebook style\nComposition/framing: 16:9 landscape, centered desk scene with laptop, notes, simple AI concept diagram, generous whitespace\nLighting/mood: soft daylight, optimistic, practical, human-centered\nColor palette: warm white, graphite, calm green, small blue accents\nText: no text, no logo\nAvoid: hype, cyberpunk, dark mood, excessive robots, watermark\n",
+    "sections": [
+      {
+        "heading": "先说一句人话",
+        "paragraphs": [
+          "今天想聊一个很实际的问题：为什么同样的问题，有人用 AI 越用越顺，有人越问越乱？我希望这篇文章不只是把概念讲清楚，也能给你一个明天就能试的小动作。",
+          "我的理解是：好技术最后都应该回到人的问题上。AI 实用技巧不是为了显得厉害，而是为了帮我们少走一点弯路。"
+        ],
+        "bullets": []
+      },
+      {
+        "heading": "把概念拆开看",
+        "paragraphs": [
+          "这件事可以先抓住四个关键词：任务拆解、验收标准、上下文、提示词。如果这些词一开始看着有点陌生，没关系，我们先把它们当成工具箱里的几个抽屉。",
+          "真正重要的是知道什么时候打开哪个抽屉，而不是一上来背定义。"
+        ],
+        "bullets": [
+          "先问：我要解决的具体问题是什么？",
+          "再问：AI 需要哪些上下文才不会乱猜？",
+          "最后问：我怎样判断答案算不算合格？"
+        ]
+      },
+      {
+        "heading": "一个小例子",
+        "paragraphs": [
+          "比如你想让 AI 帮你解释一段论文，直接说“帮我总结”通常会得到一段看似完整但不一定可用的回答。",
+          "更好的问法是：先让它列出核心问题，再让它用生活例子解释，最后要求它标出哪些地方需要查原文确认。"
+        ],
+        "bullets": []
+      },
+      {
+        "heading": "技术背后的直觉",
+        "paragraphs": [
+          "很多大模型能力看起来像魔法，本质上仍然是模式学习、概率选择和上下文对齐的组合。",
+          "我们不需要把每个公式都背下来，但要知道：模型越缺少边界，越容易把“听起来合理”误当成“真的可靠”。"
+        ],
+        "bullets": []
+      },
+      {
+        "heading": "今天可以练一下",
+        "paragraphs": [
+          "给自己找一个正在拖延的小任务，写下三句话：目标是什么、材料有哪些、怎样算完成。",
+          "然后把这三句话交给 AI，让它先反问你缺失的信息。这个动作很小，但会明显提高回答质量。"
+        ],
+        "bullets": []
+      },
+      {
+        "heading": "最后",
+        "paragraphs": [
+          "我一直相信，技术文章可以严谨，也可以有温度。复杂问题不必写得吓人，先把边界讲清楚，再给一个能动手的小练习。",
+          "如果这篇文章能帮你少一点焦虑，多一点可执行的方向，它就有价值。"
+        ],
+        "bullets": []
+      }
+    ],
+    "attempt": 1,
+    "tags": [
+      "AI",
+      "AI 实用技巧",
+      "技术科普",
+      "个人思考"
+    ]
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "score": {
+        "total": 100,
+        "passed": true,
+        "threshold": 85,
+        "details": {
+          "title": 10,
+          "structure": 14,
+          "readability": 14,
+          "warmth": 12,
+          "technical_grounding": 16,
+          "actionability": 10,
+          "safety": 12,
+          "image_fit": 6,
+          "source_discipline": 6
+        },
+        "reasons": [
+          "达到入库标准，可保存为本地待审稿。"
+        ],
+        "rewrite_required": false
+      },
+      "title": "把复杂任务交给 AI 前，先写清楚验收标准"
+    }
+  ],
+  "image_generation": {
+    "mode": "codex_builtin_imagegen",
+    "status": "generated",
+    "prompt_file": "cover_prompt.txt",
+    "target_file": "cover.png",
+    "cover_file": "cover.png",
+    "raw_file": "cover_raw.png",
+    "generated_source": "C:\\Users\\18103\\.codex\\generated_images\\019e8140-39a0-7180-bc8e-39979f63c8bd\\ig_05fca9b6e7344311016a1d08beb6c08197b43fa58b725b887a.png",
+    "cover_dimensions": "1024x576"
+  },
+  "resource_context": {
+    "status": "empty",
+    "file_count": 0,
+    "files": []
+  },
+  "wechat_draft": {
+    "status": "dry_run_ready",
+    "payload_file": "wechat_draft_payload.dry_run.json"
+  },
+  "github_sync": {
+    "status": "pending",
+    "command": "powershell -ExecutionPolicy Bypass -File scripts\\sync_github.ps1"
+  }
 }
